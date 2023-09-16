@@ -96,12 +96,12 @@ class AdminWindowPanel(QWidget):
 
     # checks if the admin pin is the same as the admin pin
     def ACCESS_PIN(self):
-        Faculty_Pass = self.ADMINID.text()
-        findadmin = Cloudfirestore.collection('USERS').where('Name', '==', 'admin').stream()
+        Admin_Pass = self.ADMINID.text()
+        findadminpin = Cloudfirestore.collection('USERS').where('Name', '==', 'admin').stream()
         Find_Logs = False
-        for admin_user in findadmin:
-            admin_data = admin_user.to_dict()
-            if 'ID' in admin_data and admin_data['ID'] == Faculty_Pass:
+        for user_admin in findadminpin:
+            admin_data = user_admin.to_dict()
+            if 'ID' in admin_data and admin_data['ID'] == Admin_Pass:
                 Find_Logs = True
                 break
         if Find_Logs:
