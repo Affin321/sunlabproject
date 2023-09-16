@@ -28,7 +28,7 @@ class AccessWindowPanel(QWidget):
         self.ButtonAccess.clicked.connect(self.Valid_ACCESSPIN)
         self.Text_Access.addWidget(self.ButtonAccess)
 
-    #  hecks if the entered id is the smae as the one from the firebase
+    #  checks if the entered id is the same as the one from the firebase
     def Valid_ACCESSPIN(self):
         Valid_Pin = self.AccessIdforPSU.text().strip()
 
@@ -105,9 +105,9 @@ class AdminWindowPanel(QWidget):
                 Find_Logs = True
                 break
         if Find_Logs:
-            self.Newwindow = admintables()
+            self.BrandWindow = admintables()
 
-            self.Newwindow.show()
+            self.BrandWindow.show()
 
         else:
             QMessageBox.warning(self, "Wrong Admin", "Enter a correct ID")
@@ -116,7 +116,7 @@ class AdminWindowPanel(QWidget):
 class admintables(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("ADMIN PANNEL")
+        self.setWindowTitle("All the Logs")
         self.showMaximized()
 
         self.adminalayout = QHBoxLayout()
@@ -158,7 +158,7 @@ class admintables(QWidget):
             self.userTables.setItem(i, 1, QTableWidgetItem(doc_dict.get('ID', 'N/A')))
             self.userTables.setItem(i, 2, QTableWidgetItem(doc_dict.get('Status', 'N/A')))
 
-            # adds button to the action colum, if they are suspened, it makes the buton to 'activate'
+            # adds button to the action colum, if they are suspended, it makes the button to 'activate'
             # if they are active, makes the button to 'ban'
             btn = QPushButton("Activate" if doc_dict.get('Status') == 'suspended' else "Ban")
             btn.clicked.connect(lambda checked, doc_id=doc.id: self.changeStatusinfirebase(doc_id))
@@ -178,7 +178,7 @@ class admintables(QWidget):
             logsInfomation = doc.to_dict()
             self.adminlogsTable.insertRow(i)
 
-            # populates the table from the databse or if it doesnt exist, sets it to 'N/A'
+            # populates the table from the databse or if it dosent exist, sets it to 'N/A'
             self.adminlogsTable.setItem(i, 0, QTableWidgetItem(logsInfomation.get('Name', 'N/A')))
             self.adminlogsTable.setItem(i, 1, QTableWidgetItem(logsInfomation.get('ID', 'N/A')))
             self.adminlogsTable.setItem(i, 2, QTableWidgetItem(logsInfomation.get('EntryTimestamp', 'N/A')))
