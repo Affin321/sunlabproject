@@ -160,9 +160,9 @@ class admintables(QWidget):
 
             # adds button to the action colum, if they are suspended, it makes the button to 'activate'
             # if they are active, makes the button to 'ban'
-            btn = QPushButton("Activate" if doc_dict.get('Status') == 'suspended' else "Ban")
-            btn.clicked.connect(lambda checked, doc_id=doc.id: self.changeStatusinfirebase(doc_id))
-            self.userTables.setCellWidget(i, 3, btn)
+            LOGSbutton = QPushButton("Activate" if doc_dict.get('Status') == 'suspended' else "Ban")
+            LOGSbutton.clicked.connect(lambda checked, doc_id=doc.id: self.changeStatusinfirebase(doc_id))
+            self.userTables.setCellWidget(i, 3, LOGSbutton)
 
     def changeStatusinfirebase(self, doc_id):
         doc = Cloudfirestore.collection('USERS').document(doc_id).get().to_dict()
